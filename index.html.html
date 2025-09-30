@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio & AI Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: #764ba2;
+        }
+
+        .lang-selector {
+            padding: 8px 15px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .lang-selector:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 36px;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .bio {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .ai-card {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .ai-card h3 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .ai-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .ai-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero-section {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo" data-en="Silje's Portfolio" data-no="Siljes Portefølje">Silje's Portfolio</div>
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showPage('portfolio')" data-en="Portfolio" data-no="Portefølje">Portfolio</button>
+            <button class="nav-btn" onclick="showPage('ai')" data-en="AI Programs" data-no="AI-Programmer">AI Programs</button>
+            <button class="lang-selector" onclick="toggleLanguage()">🌍 English</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- PORTFOLIO PAGE -->
+        <div id="portfolio" class="page active">
+            <div class="hero-section">
+                <div class="profile-pic">👤</div>
+                <h1 data-en="Hello! I'm Silje" data-no="Hei! Jeg er Silje">Hello! I'm Silje</h1>
+                <p class="bio" data-en="Welcome to my portfolio! I love learning about technology with my dad. I'm just starting my journey in web development and exploring amazing AI tools. This is where I share what I'm learning and the projects I create along the way!" data-no="Velkommen til porteføljen min! Jeg elsker å lære om teknologi med far. Jeg har akkurat begynt min reise innen webutvikling og utforsker fantastiske AI-verktøy. Her deler jeg det jeg lærer og prosjektene jeg lager underveis!">
+                    Welcome to my portfolio! I love learning about technology with my dad. I'm just starting my journey in web development and exploring amazing AI tools. This is where I share what I'm learning and the projects I create along the way!
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 data-en="My Projects" data-no="Mine Prosjekter">My Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3 data-en="Project 1: AI Tools Guide" data-no="Prosjekt 1: AI-Verktøy Guide">Project 1: AI Tools Guide</h3>
+                        <p data-en="Created a complete guide to awesome AI tools for teens! This guide shows all the different AI programs that can help with creativity, learning, and making cool projects. Check out the AI Programs page to see them all!" data-no="Laget en komplett guide til kule AI-verktøy for ungdom! Denne guiden viser alle de forskjellige AI-programmene som kan hjelpe med kreativitet, læring og å lage kule prosjekter. Sjekk ut AI-Programmer-siden for å se dem alle!">
+                            Created a complete guide to awesome AI tools for teens! This guide shows all the different AI programs that can help with creativity, learning, and making cool projects. Check out the AI Programs page to see them all!
+                        </p>
+                    </div>
+                    <div class="project-card">
+                        <h3 data-en="Project 2: Creating Images with Gamma" data-no="Prosjekt 2: Lage Bilder med Gamma">Project 2: Creating Images with Gamma</h3>
+                        <p data-en="Learning how to use Gamma 3.0 to create beautiful images! This AI tool helps design amazing graphics and presentations. I'm exploring how to turn my ideas into visual art." data-no="Lærer hvordan jeg bruker Gamma 3.0 til å lage vakre bilder! Dette AI-verktøyet hjelper med å designe fantastisk grafikk og presentasjoner. Jeg utforsker hvordan jeg kan gjøre ideene mine om til visuell kunst.">
+                            Learning how to use Gamma 3.0 to create beautiful images! This AI tool helps design amazing graphics and presentations. I'm exploring how to turn my ideas into visual art.
+                        </p>
+                    </div>
+                    <div class="project-card">
+                        <h3 data-en="Project 3: Making Videos with Wan" data-no="Prosjekt 3: Lage Videoer med Wan">Project 3: Making Videos with Wan</h3>
+                        <p data-en="Taking the images from Project 2 and turning them into videos using Wan 2.2! Learning how AI can create moving stories from still pictures. It's like magic bringing my images to life!" data-no="Tar bildene fra Prosjekt 2 og gjør dem om til videoer ved hjelp av Wan 2.2! Lærer hvordan AI kan lage bevegelige historier fra stillbilder. Det er som magi å bringe bildene mine til liv!">
+                            Taking the images from Project 2 and turning them into videos using Wan 2.2! Learning how AI can create moving stories from still pictures. It's like magic bringing my images to life!
+                        </p>
+                    </div>
+                    <div class="project-card">
+                        <h3 data-en="Project 4: Awesome Presentations" data-no="Prosjekt 4: Kule Presentasjoner">Project 4: Awesome Presentations</h3>
+                        <p data-en="Discovering how to create amazing PowerPoint presentations quickly and easily! Using AI tools to make school projects and presentations look professional and eye-catching. No more boring slides!" data-no="Oppdager hvordan jeg kan lage fantastiske PowerPoint-presentasjoner raskt og enkelt! Bruker AI-verktøy til å få skoleprosjekter og presentasjoner til å se profesjonelle og iøynefallende ut. Ingen flere kjedelige lysbilder!">
+                            Discovering how to create amazing PowerPoint presentations quickly and easily! Using AI tools to make school projects and presentations look professional and eye-catching. No more boring slides!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 data-en="My Skills" data-no="Mine Ferdigheter">My Skills</h2>
+                <div class="skills-list">
+                    <span class="skill-tag" data-en="Learning with Dad" data-no="Lærer med Far">Learning with Dad</span>
+                    <span class="skill-tag" data-en="Creative Problem Solving" data-no="Kreativ Problemløsning">Creative Problem Solving</span>
+                    <span class="skill-tag" data-en="Digital Creativity" data-no="Digital Kreativitet">Digital Creativity</span>
+                    <span class="skill-tag" data-en="Web Design" data-no="Webdesign">Web Design</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 data-en="Contact Me" data-no="Kontakt Meg">Contact Me</h2>
+                <p data-en="Want to work together or just say hi? Reach out on Discord!" data-no="Vil du samarbeide eller bare si hei? Ta kontakt på Discord!">
+                    Want to work together or just say hi? Reach out on Discord!
+                </p>
+                <p style="margin-top: 15px; font-size: 18px;">
+                    <svg style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;" viewBox="0 0 24 24" fill="#5865F2">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                    <span style="font-weight: bold;">Discord:</span> <span style="color: #5865F2;">gamersilje</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- AI PROGRAMS PAGE -->
+        <div id="ai" class="page">
+            <div class="section">
+                <h1 data-en="Awesome AI Programs for Teens" data-no="Kule AI-Programmer for Ungdom">Awesome AI Programs for Teens</h1>
+                <p data-en="Artificial Intelligence (AI) is everywhere! Here are some cool AI tools that can help you create art, music, videos, and more. Click on each to learn what it does!" data-no="Kunstig intelligens (AI) er overalt! Her er noen kule AI-verktøy som kan hjelpe deg med å lage kunst, musikk, videoer og mer. Klikk på hver for å lære hva den gjør!">
+                    Artificial Intelligence (AI) is everywhere! Here are some cool AI tools that can help you create art, music, videos, and more. Click on each to learn what it does!
+                </p>
+            </div>
+
+            <div class="ai-grid">
+                <div class="ai-card">
+                    <div class="ai-icon">🤖</div>
+                    <h3>Claude.ai</h3>
+                    <p data-en="A smart AI assistant that can help you with homework, writing, coding, and learning new things! Ask questions and get detailed, helpful answers. Perfect for students!" data-no="En smart AI-assistent som kan hjelpe deg med lekser, skriving, koding og å lære nye ting! Still spørsmål og få detaljerte, nyttige svar. Perfekt for elever!">
+                        A smart AI assistant that can help you with homework, writing, coding, and learning new things! Ask questions and get detailed, helpful answers. Perfect for students!
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">💬</div>
+                    <h3>ChatGPT</h3>
+                    <p data-en="One of the most popular AI chatbots! It can answer questions, help with creative writing, explain difficult topics, and even help with coding. Like having a super smart study buddy!" data-no="En av de mest populære AI-chatbotene! Den kan svare på spørsmål, hjelpe med kreativ skriving, forklare vanskelige emner, og til og med hjelpe med koding. Som å ha en superlur studiekamerat!">
+                        One of the most popular AI chatbots! It can answer questions, help with creative writing, explain difficult topics, and even help with coding. Like having a super smart study buddy!
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎬</div>
+                    <h3>Wan 2.2</h3>
+                    <p data-en="Wan is an AI video generator. You type what you want to see, and it creates a video for you! Great for making short clips and animations." data-no="Wan er en AI-videogenerator. Du skriver hva du vil se, og den lager en video for deg! Flott for å lage korte klipp og animasjoner.">
+                        Wan is an AI video generator. You type what you want to see, and it creates a video for you! Great for making short clips and animations.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">📊</div>
+                    <h3>Gamma 3.0</h3>
+                    <p data-en="Gamma helps you create beautiful presentations and documents super fast. Just tell it your topic and it designs everything for you!" data-no="Gamma hjelper deg med å lage vakre presentasjoner og dokumenter superraskt. Bare fortell hva emnet er, så designer den alt for deg!">
+                        Gamma helps you create beautiful presentations and documents super fast. Just tell it your topic and it designs everything for you!
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎨</div>
+                    <h3>Midjourney</h3>
+                    <p data-en="Create stunning, artistic images! Midjourney is famous for making beautiful, professional-looking artwork. Type what you imagine and get amazing results!" data-no="Lag fantastiske, kunstneriske bilder! Midjourney er kjent for å lage vakre, profesjonelt utseende kunstverk. Skriv hva du forestiller deg og få fantastiske resultater!">
+                        Create stunning, artistic images! Midjourney is famous for making beautiful, professional-looking artwork. Type what you imagine and get amazing results!
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🖼️</div>
+                    <h3>DALL-E</h3>
+                    <p data-en="Made by OpenAI, DALL-E creates images from your descriptions. Want a picture of a cat riding a skateboard? DALL-E can make it! Great for fun and creative projects." data-no="Laget av OpenAI, DALL-E lager bilder fra beskrivelsene dine. Vil du ha et bilde av en katt som kjører skateboard? DALL-E kan lage det! Flott for morsomme og kreative prosjekter.">
+                        Made by OpenAI, DALL-E creates images from your descriptions. Want a picture of a cat riding a skateboard? DALL-E can make it! Great for fun and creative projects.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎨</div>
+                    <h3>Seedream 4.0</h3>
+                    <p data-en="Seedream turns your ideas into amazing pictures and artwork. Type what you imagine, and watch it come to life as digital art!" data-no="Seedream gjør ideene dine om til fantastiske bilder og kunstverk. Skriv hva du forestiller deg, og se det bli til digital kunst!">
+                        Seedream turns your ideas into amazing pictures and artwork. Type what you imagine, and watch it come to life as digital art!
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">✨</div>
+                    <h3>Canva.ai</h3>
+                    <p data-en="Canva with AI powers! Design posters, social media posts, and school projects. The AI helps with ideas and makes designing super easy." data-no="Canva med AI-krefter! Design plakater, innlegg på sosiale medier og skoleprosjekter. AI-en hjelper med ideer og gjør design superenkelt.">
+                        Canva with AI powers! Design posters, social media posts, and school projects. The AI helps with ideas and makes designing super easy.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎤</div>
+                    <h3>Eleven Labs</h3>
+                    <p data-en="Create realistic AI voices! You can make the computer speak in different voices and languages. Perfect for podcasts or video voiceovers." data-no="Lag realistiske AI-stemmer! Du kan få datamaskinen til å snakke med forskjellige stemmer og språk. Perfekt for podkaster eller stemmer til videoer.">
+                        Create realistic AI voices! You can make the computer speak in different voices and languages. Perfect for podcasts or video voiceovers.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎵</div>
+                    <h3>Suno</h3>
+                    <p data-en="Make your own music! Suno creates complete songs with singing and instruments. Just describe what kind of music you want to hear." data-no="Lag din egen musikk! Suno lager komplette sanger med sang og instrumenter. Bare beskriv hva slags musikk du vil høre.">
+                        Make your own music! Suno creates complete songs with singing and instruments. Just describe what kind of music you want to hear.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎭</div>
+                    <h3>HeyGen</h3>
+                    <p data-en="Create AI avatars that can speak for you! Make videos with virtual characters that look real. Great for presentations or fun videos." data-no="Lag AI-avatarer som kan snakke for deg! Lag videoer med virtuelle karakterer som ser ekte ut. Flott for presentasjoner eller morsomme videoer.">
+                        Create AI avatars that can speak for you! Make videos with virtual characters that look real. Great for presentations or fun videos.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🤖</div>
+                    <h3>Opus</h3>
+                    <p data-en="Opus is a powerful AI writing assistant. It helps you write stories, essays, and creative content. Like having a smart friend to help with writing!" data-no="Opus er en kraftig AI-skriveassistent. Den hjelper deg med å skrive historier, essays og kreativt innhold. Som å ha en smart venn til å hjelpe med skriving!">
+                        Opus is a powerful AI writing assistant. It helps you write stories, essays, and creative content. Like having a smart friend to help with writing!
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">📚</div>
+                    <h3>Notebook LM</h3>
+                    <p data-en="Turn your notes into podcasts! Upload your study notes and Notebook LM creates a discussion between two AI hosts about your material." data-no="Gjør notatene dine om til podkaster! Last opp studienotatene dine, og Notebook LM lager en diskusjon mellom to AI-verter om materialet ditt.">
+                        Turn your notes into podcasts! Upload your study notes and Notebook LM creates a discussion between two AI hosts about your material.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">💻</div>
+                    <h3>LM Studio.ai</h3>
+                    <p data-en="Run AI models on your own computer! This is for more advanced users who want to experiment with AI without needing the internet." data-no="Kjør AI-modeller på din egen datamaskin! Dette er for mer avanserte brukere som vil eksperimentere med AI uten å trenge internett.">
+                        Run AI models on your own computer! This is for more advanced users who want to experiment with AI without needing the internet.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🖼️</div>
+                    <h3>OpenArt</h3>
+                    <p data-en="A huge library of AI-generated art! Browse millions of images, learn how they were made, and create your own amazing artwork." data-no="Et enormt bibliotek med AI-generert kunst! Bla gjennom millioner av bilder, lær hvordan de ble laget, og lag dine egne fantastiske kunstverk.">
+                        A huge library of AI-generated art! Browse millions of images, learn how they were made, and create your own amazing artwork.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🎨</div>
+                    <h3>Krea.Ai</h3>
+                    <p data-en="Real-time AI art creation! Watch your artwork appear as you type and adjust. It's like magic painting that responds instantly to your ideas." data-no="Sanntids AI-kunstskaping! Se kunstverket ditt dukke opp mens du skriver og justerer. Det er som magisk maling som reagerer umiddelbart på ideene dine.">
+                        Real-time AI art creation! Watch your artwork appear as you type and adjust. It's like magic painting that responds instantly to your ideas.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🖌️</div>
+                    <h3>Qwen-Image</h3>
+                    <p data-en="Advanced AI image generator that creates detailed and creative pictures. Great for making unique artwork and exploring different art styles." data-no="Avansert AI-bildegenerator som lager detaljerte og kreative bilder. Flott for å lage unike kunstverk og utforske forskjellige kunststiler.">
+                        Advanced AI image generator that creates detailed and creative pictures. Great for making unique artwork and exploring different art styles.
+                    </p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">🔍</div>
+                    <h3>Perplexity</h3>
+                    <p data-en="An AI-powered search engine that gives you direct answers with sources! Instead of just showing links, it reads websites and gives you a clear summary with references." data-no="En AI-drevet søkemotor som gir deg direkte svar med kilder! I stedet for bare å vise lenker, leser den nettsider og gir deg et klart sammendrag med referanser.">
+                        An AI-powered search engine that gives you direct answers with sources! Instead of just showing links, it reads websites and gives you a clear summary with references.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section" style="margin-top: 30px;">
+                <h2 data-en="Stay Safe with AI!" data-no="Vær Trygg med AI!">Stay Safe with AI!</h2>
+                <p data-en="Remember: Always get permission from your parents or teachers before using AI tools. Never share personal information, and always use AI responsibly and for good purposes!" data-no="Husk: Få alltid tillatelse fra foreldrene eller lærerne dine før du bruker AI-verktøy. Del aldri personlig informasjon, og bruk alltid AI ansvarlig og til gode formål!">
+                    Remember: Always get permission from your parents or teachers before using AI tools. Never share personal information, and always use AI responsibly and for good purposes!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'no' : 'en';
+            const langBtn = document.querySelector('.lang-selector');
+            langBtn.textContent = currentLang === 'en' ? '🌍 English' : '🌍 Norsk';
+
+            document.querySelectorAll('[data-en]').forEach(element => {
+                element.textContent = element.getAttribute('data-' + currentLang);
+            });
+        }
+    </script>
+</body>
+</html>
