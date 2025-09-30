@@ -40,6 +40,7 @@
             display: flex;
             gap: 15px;
             align-items: center;
+            position: relative;
         }
 
         .nav-btn {
@@ -51,6 +52,7 @@
             cursor: pointer;
             font-size: 16px;
             transition: all 0.3s;
+            position: relative;
         }
 
         .nav-btn:hover {
@@ -60,6 +62,50 @@
 
         .nav-btn.active {
             background: #764ba2;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 280px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            z-index: 1000;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-arrow {
+            margin-left: 5px;
+            font-size: 12px;
         }
 
         .lang-selector {
@@ -242,7 +288,15 @@
         <div class="logo" data-en="Silje's Portfolio" data-no="Siljes Portefølje">Silje's Portfolio</div>
         <div class="nav-buttons">
             <button class="nav-btn active" onclick="showPage('portfolio')" data-en="Portfolio" data-no="Portefølje">Portfolio</button>
-            <button class="nav-btn" onclick="showPage('ai')" data-en="AI Programs" data-no="AI-Programmer">AI Programs</button>
+            <div class="dropdown">
+                <button class="nav-btn" data-en="Projects ▼" data-no="Prosjekter ▼">Projects <span class="dropdown-arrow">▼</span></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showPage('ai'); return false;" data-en="Project 1: AI Tools Guide" data-no="Prosjekt 1: AI-Verktøy Guide">Project 1: AI Tools Guide</a>
+                    <a href="#" onclick="showPage('project2'); return false;" data-en="Project 2: Creating Images with Gamma" data-no="Prosjekt 2: Lage Bilder med Gamma">Project 2: Creating Images with Gamma</a>
+                    <a href="#" onclick="showPage('project3'); return false;" data-en="Project 3: Making Videos with Wan" data-no="Prosjekt 3: Lage Videoer med Wan">Project 3: Making Videos with Wan</a>
+                    <a href="#" onclick="showPage('project4'); return false;" data-en="Project 4: Awesome Presentations" data-no="Prosjekt 4: Kule Presentasjoner">Project 4: Awesome Presentations</a>
+                </div>
+            </div>
             <button class="lang-selector" onclick="toggleLanguage()">🌍 English</button>
         </div>
     </div>
@@ -315,7 +369,7 @@
         <!-- AI PROGRAMS PAGE -->
         <div id="ai" class="page">
             <div class="section">
-                <h1 data-en="Awesome AI Programs for Teens" data-no="Kule AI-Programmer for Ungdom">Awesome AI Programs for Teens</h1>
+                <h1 data-en="Project 1: Awesome AI Tools Guide" data-no="Prosjekt 1: Kule AI-Verktøy Guide">Project 1: Awesome AI Tools Guide</h1>
                 <p data-en="Artificial Intelligence (AI) is everywhere! Here are some cool AI tools that can help you create art, music, videos, and more. Click on each to learn what it does!" data-no="Kunstig intelligens (AI) er overalt! Her er noen kule AI-verktøy som kan hjelpe deg med å lage kunst, musikk, videoer og mer. Klikk på hver for å lære hva den gjør!">
                     Artificial Intelligence (AI) is everywhere! Here are some cool AI tools that can help you create art, music, videos, and more. Click on each to learn what it does!
                 </p>
@@ -472,6 +526,57 @@
                 <p data-en="Remember: Always get permission from your parents or teachers before using AI tools. Never share personal information, and always use AI responsibly and for good purposes!" data-no="Husk: Få alltid tillatelse fra foreldrene eller lærerne dine før du bruker AI-verktøy. Del aldri personlig informasjon, og bruk alltid AI ansvarlig og til gode formål!">
                     Remember: Always get permission from your parents or teachers before using AI tools. Never share personal information, and always use AI responsibly and for good purposes!
                 </p>
+            </div>
+        </div>
+
+        <!-- PROJECT 2 PAGE -->
+        <div id="project2" class="page">
+            <div class="section">
+                <h1 data-en="Project 2: Creating Images with Gamma 3.0" data-no="Prosjekt 2: Lage Bilder med Gamma 3.0">Project 2: Creating Images with Gamma 3.0</h1>
+                <p data-en="This project is coming soon! I'm learning how to use Gamma 3.0 to create beautiful images and graphics. Stay tuned for updates!" data-no="Dette prosjektet kommer snart! Jeg lærer hvordan jeg bruker Gamma 3.0 til å lage vakre bilder og grafikk. Hold deg oppdatert!">
+                    This project is coming soon! I'm learning how to use Gamma 3.0 to create beautiful images and graphics. Stay tuned for updates!
+                </p>
+                <div style="margin-top: 30px; padding: 40px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🎨</div>
+                    <h2 data-en="Coming Soon!" data-no="Kommer Snart!">Coming Soon!</h2>
+                    <p data-en="I'll be sharing my creative work with Gamma 3.0 here soon." data-no="Jeg deler snart mitt kreative arbeid med Gamma 3.0 her.">
+                        I'll be sharing my creative work with Gamma 3.0 here soon.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT 3 PAGE -->
+        <div id="project3" class="page">
+            <div class="section">
+                <h1 data-en="Project 3: Making Videos with Wan 2.2" data-no="Prosjekt 3: Lage Videoer med Wan 2.2">Project 3: Making Videos with Wan 2.2</h1>
+                <p data-en="This project is coming soon! I'm learning how to turn my images into amazing videos using Wan 2.2. Check back later for my video creations!" data-no="Dette prosjektet kommer snart! Jeg lærer hvordan jeg gjør bildene mine om til fantastiske videoer ved hjelp av Wan 2.2. Kom tilbake senere for videoskapelsene mine!">
+                    This project is coming soon! I'm learning how to turn my images into amazing videos using Wan 2.2. Check back later for my video creations!
+                </p>
+                <div style="margin-top: 30px; padding: 40px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🎬</div>
+                    <h2 data-en="Coming Soon!" data-no="Kommer Snart!">Coming Soon!</h2>
+                    <p data-en="Exciting video projects will be showcased here!" data-no="Spennende videoprosjekter vil bli vist her!">
+                        Exciting video projects will be showcased here!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT 4 PAGE -->
+        <div id="project4" class="page">
+            <div class="section">
+                <h1 data-en="Project 4: Awesome Presentations" data-no="Prosjekt 4: Kule Presentasjoner">Project 4: Awesome Presentations</h1>
+                <p data-en="This project is coming soon! I'm discovering how to create professional and eye-catching presentations using AI tools. More to come!" data-no="Dette prosjektet kommer snart! Jeg oppdager hvordan jeg kan lage profesjonelle og iøynefallende presentasjoner ved hjelp av AI-verktøy. Mer kommer!">
+                    This project is coming soon! I'm discovering how to create professional and eye-catching presentations using AI tools. More to come!
+                </p>
+                <div style="margin-top: 30px; padding: 40px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">📊</div>
+                    <h2 data-en="Coming Soon!" data-no="Kommer Snart!">Coming Soon!</h2>
+                    <p data-en="My presentation projects will appear here soon!" data-no="Presentasjonsprosjektene mine vises her snart!">
+                        My presentation projects will appear here soon!
+                    </p>
+                </div>
             </div>
         </div>
     </div>
